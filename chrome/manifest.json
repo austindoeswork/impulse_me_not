@@ -1,0 +1,34 @@
+{
+  "name": "Impulse me not",
+  
+  "description": "preventing impulse buying",
+  
+  "version": "0.0.1",
+
+  "permissions": ["tabs", "*://*.amazon.com/*"],
+  
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "web_accessible_resources": [
+    "js/resources/jquery-1.10.2.js"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.amazon.com/*"],
+      "js": [
+        "resources/jquery-1.10.2.js",
+        "hello.js"
+      ]
+    }
+  ],
+  
+  "browser_action": {
+    "default_title": "Make this page red"
+  },
+  
+  "manifest_version": 2
+}
