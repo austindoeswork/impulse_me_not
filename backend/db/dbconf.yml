@@ -1,0 +1,4 @@
+# needed for goose boilerplate
+development:
+  driver: sqlite3
+  open: placeholder.db # literally a placeholder, doesn't mater what this value is
