@@ -2,7 +2,7 @@
 -- +goose Up
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE object (
-  id INTEGER_PRIMARY_KEY,
+  id INTEGER PRIMARY KEY,
   uuid VARCHAR(10), 
   addcount int, 
   purchasecount int

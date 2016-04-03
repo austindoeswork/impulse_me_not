@@ -9,8 +9,9 @@ type UserObjectRelation struct {
 	ID         int
 	UserID     int
 	ObjectUUID ObjectUUID // string, shortcut to make things faster
-	Time       time.Time
-	Purchased  bool
+	//ObjectUUID string // string, shortcut to make things faster
+	Time      time.Time
+	Purchased bool
 }
 
 // CreateUserObjectRelation and add it to the database
@@ -18,6 +19,7 @@ func (db *Database) CreateUserObjectRelation(uor *UserObjectRelation) error {
 	return db.userObjectRelationMap.Insert(uor)
 }
 
+// GetUORByID comment
 func (db *Database) GetUORByID(id int) (*UserObjectRelation, error) {
 	uor := new(UserObjectRelation)
 	err := db.userObjectRelationMap.Get(uor, id)

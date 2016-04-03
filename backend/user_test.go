@@ -58,9 +58,6 @@ func TestUserByUUID(t *testing.T) {
 	user1 := User{UUID: 1}
 
 	uuid2 := getTestUserUUID()
-	uuid2 = getTestUserUUID()
-	uuid2 = getTestUserUUID()
-	//uuid2 = UserUUID(2)
 	user2 := User{UUID: uuid2}
 
 	err := db.CreateUser(&user1)

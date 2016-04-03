@@ -2,7 +2,7 @@
 -- +goose Up
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE user_object_relation (
-  id INTEGER_PRIMARY_KEY,
+  id INTEGER PRIMARY KEY,
   userid int, 
   objectuuid TEXT, 
   purchased bool,

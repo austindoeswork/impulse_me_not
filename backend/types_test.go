@@ -85,13 +85,18 @@ func TestCastString(t *testing.T) {
 	uuid := getTestObjectUUID()
 	fmt.Println("uuid:", uuid)
 
-	var defString string
-	defString = "asdfasdf"
-	rv := reflect.TypeOf(uuid)
-	fmt.Println("rv:", rv.Kind())
+	//var defString string
+	//defString = "asdfasdf"
+	//def := reflect.ValueOf(defString)
+	//fmt.Println("def:", def.Kind())
 
-	def := reflect.ValueOf(defString)
-	fmt.Println("def:", def.Kind())
+	rt := reflect.TypeOf(uuid)
+	rv := reflect.ValueOf(uuid)
+	fmt.Println("rt:", rt.Kind())
+	fmt.Println("rv:", rv.CanAddr())
+	//if rt.ConvertibleTo(string) {
+	//rv.Convert(string)
+	//}
 
 	goalFunc(string(uuid))
 }
