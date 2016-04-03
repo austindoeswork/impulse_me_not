@@ -7,8 +7,7 @@ import (
 // User define
 type User struct {
 	ID   int
-	UUID int // this may not be an int
-
+	UUID UserUUID // UNSIGNED BIG INT, uint64
 }
 
 // CreateUser and insert it into the db
@@ -26,7 +25,7 @@ func (db *Database) UserByID(id int) (*User, error) {
 }
 
 // UserByUUID gets a user by uuid
-func (db *Database) UserByUUID(uuid int) (*User, error) {
+func (db *Database) UserByUUID(uuid UserUUID) (*User, error) {
 	var users []User
 	err := db.userMap.Select(&users,
 		"SELECT * FROM user WHERE uuid = ?", uuid)

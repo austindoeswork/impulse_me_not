@@ -6,7 +6,7 @@ type Object struct {
 	ID int
 
 	// UUID of the object, from amazon
-	UUID int
+	UUID ObjectUUID
 
 	// AddCount is the number of times people have considered buying
 	AddCount int
@@ -21,6 +21,6 @@ func (database *Database) CreateObject(object *Object) error {
 }
 
 // ObjectsByUUID returns an object by its uuid
-func (database *Database) ObjectsByUUID(uuid int) ([]Object, error) {
+func (database *Database) ObjectsByUUID(uuid ObjectUUID) ([]Object, error) {
 	return nil, nil
 }

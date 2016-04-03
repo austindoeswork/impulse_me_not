@@ -3,7 +3,7 @@
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE user (
   id INTEGER PRIMARY KEY,
-  uuid int
+  uuid UNSIGNED BIG INT
 );
 
 CREATE UNIQUE INDEX uuid ON user(uuid);

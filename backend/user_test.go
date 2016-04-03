@@ -2,29 +2,41 @@ package main
 
 import (
 	"github.com/stretchr/testify/assert"
+	"log"
+	"os"
 	"testing"
 )
 
-func TestGetUser(t *testing.T) {
+func TestUserGet(t *testing.T) {
 	db := openTestDB()
+
+	db.userMap.TraceOn("modl:", log.New(os.Stdout, "", log.Lshortfile))
 	defer db.Close()
 
 	user1 := User{UUID: 1}
-	user2 := User{UUID: 2}
+
+	uuid2 := getTestUserUUID()
+	uuid2 = getTestUserUUID()
+	uuid2 = getTestUserUUID()
+	//uuid2 = UserUUID(2)
+	user2 := User{UUID: uuid2}
 
 	err := db.CreateUser(&user1)
-	assert.Nil(t, err)
+	assert.Equal(t, nil, err)
 
 	err = db.CreateUser(&user2)
-	assert.Nil(t, err)
+	assert.Equal(t, nil, err)
 
-	result2, err := db.UserByID(user2.UUID)
+	result2, err := db.UserByID(user2.ID)
 
-	assert.Equal(t, err, nil)
+	assert.Equal(t, nil, err)
+	assert.NotNil(t, result2)
 	assert.Equal(t, result2.UUID, user2.UUID)
+
+	db.userMap.TraceOff()
 }
 
-func TestDuplicateUUID(t *testing.T) {
+func TestUserDuplicateUUID(t *testing.T) {
 	db := openTestDB()
 	defer db.Close()
 
@@ -40,19 +52,29 @@ func TestDuplicateUUID(t *testing.T) {
 
 func TestUserByUUID(t *testing.T) {
 	db := openTestDB()
+	db.userMap.TraceOn("modl:", log.New(os.Stdout, "", log.Lshortfile))
 	defer db.Close()
 
 	user1 := User{UUID: 1}
-	user2 := User{UUID: 2}
 
-	db.CreateUser(&user1)
-	db.CreateUser(&user2)
+	uuid2 := getTestUserUUID()
+	uuid2 = getTestUserUUID()
+	uuid2 = getTestUserUUID()
+	//uuid2 = UserUUID(2)
+	user2 := User{UUID: uuid2}
+
+	err := db.CreateUser(&user1)
+	assert.Equal(t, nil, err)
+
+	err = db.CreateUser(&user2)
+	assert.Equal(t, nil, err)
 
 	result2, err := db.UserByUUID(user2.UUID)
-	assert.Nil(t, err)
-	assert.Equal(t, result2, &user2)
 
-	// find bad uuid
-	_, err = db.UserByUUID(0)
-	assert.NotNil(t, err)
+	assert.Equal(t, nil, err)
+	assert.NotNil(t, result2)
+	assert.Equal(t, result2.UUID, user2.UUID)
+
+	db.userMap.TraceOff()
+
 }
