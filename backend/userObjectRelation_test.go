@@ -5,17 +5,12 @@ import (
 	"testing"
 )
 
-func TestSimpleHandle(t *testing.T) {
-	recorder := getHTTPResponse("/test")
-	assert.Equal(t, recorder.Body.String(), "hey, whats up")
-}
-
-func TestGetImpulses(t *testing.T) {
-	db = openTestDB()
+func TestGetUORByUserId(t *testing.T) {
+	db := openTestDB()
 	defer db.Close()
 
-	user1 := User{UUID: 10}
-	user2 := User{UUID: 15}
+	user1 := User{UUID: 3}
+	user2 := User{UUID: 4}
 
 	db.CreateUser(&user1)
 	db.CreateUser(&user2)
@@ -30,11 +25,10 @@ func TestGetImpulses(t *testing.T) {
 
 	uors, err := db.UserObjectRelationByUserID(1)
 
-	assert.Nil(t, err)
+	assert.Equal(t, nil, err)
 	assert.NotNil(t, uors)
 	assert.Len(t, uors, 2)
 
-	recorder := getHTTPResponse("/openImpulses?10")
-	assert.Equal(t, "[2,3]", recorder.Body.String())
-
+	assert.Equal(t, uor1.ObjectUUID, uors[0].ObjectUUID)
+	assert.Equal(t, uor2.ObjectUUID, uors[1].ObjectUUID)
 }

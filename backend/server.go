@@ -16,6 +16,7 @@ func startServer() {
 func newHandler() http.Handler {
 	router := mux.NewRouter()
 	router.HandleFunc("/test", HandleTest).Methods("GET")
+	router.HandleFunc("/openImpulses", HandleOpenImpulses).Methods("GET")
 
 	return router
 }

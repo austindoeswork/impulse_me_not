@@ -19,3 +19,8 @@ type Object struct {
 func (database *Database) CreateObject(object *Object) error {
 	return database.objectMap.Insert(object)
 }
+
+// ObjectsByUUID returns an object by its uuid
+func (database *Database) ObjectsByUUID(uuid int) ([]Object, error) {
+	return nil, nil
+}
